@@ -21,7 +21,7 @@ IT-Support-Ticket-Python/
 ├── requirements.txt              # Project dependencies
 └── README.md
 
----
+```
 
 ## Some Notes
 Built this project over a few weeks to transition from writing quick scripts in Jupyter Notebooks to building modular, reproducible Python ETL pipelines. 
