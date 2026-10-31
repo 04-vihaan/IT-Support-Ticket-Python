@@ -1,48 +1,15 @@
-from pathlib import Path
 import pandas as pd
-
+from pathlib import Path
 
 def load_raw_tickets(file_path: str) -> pd.DataFrame:
-    """Safely loads raw IT support ticket CSV data into a pandas DataFrame.
-
-    Args:
-        file_path (str): Relative or absolute path to the raw CSV file.
-
-    Returns:
-        pd.DataFrame: Loaded raw ticket dataset.
-    """
+    """Loads raw ticket data from a CSV file."""
     path = Path(file_path)
-
-    # Check file existence using pathlib
-    if not path.is_file():
-        raise FileNotFoundError(
-            f"[IO Error] Target file not found: {path.resolve()}"
-        )
-
-    try:
-        df = pd.read_csv(path)
-        if df.empty:
-            raise ValueError(
-                f"[Data Error] File exists but contains no data: {path}"
-            )
-
-        print(
-            f"[success] Data is now loaded {len(df):,} records across {len(df.columns)} columns from '{path.name}'."
-        )
-        return df
-
-    except pd.errors.EmptyDataError:
-        print(f"[ERROR] Dataset at '{path}' is completely blank.")
-        raise
-    except Exception as e:
-        print(f"[ERROR] Unexpected error while loading '{path}': {e}")
-        raise
-
-
-if __name__ == "__main__":
-    # Internal module testing
-    test_path = "data/raw/it_support_tickets.csv"
-    print("Testing data_loader.py execution...")
-    raw_df = load_raw_tickets(test_path)
-    print("\nDataset Preview:")
-    print(raw_df.head(3))
+    if not path.exists():
+        raise FileNotFoundError(f"Data file not found at {path}")
+        
+    df = pd.read_csv(path)
+    if df.empty:
+        raise ValueError("The dataset is empty.")
+        
+    print(f"Data loaded: {len(df)} records found in {path.name}.")
+    return df

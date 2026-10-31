@@ -1,31 +1,18 @@
-# IT Support Ticket Management & Resolution Analytics
+# IT Support Ticket Analytics (Python)
 
-A modular Python pipeline for ingesting, cleaning, analyzing, and reporting on IT support ticket logs using standard data libraries (`pandas`, `numpy`, `matplotlib`, `seaborn`).
+Modular pipeline that cleans 10,000 IT support tickets and reports resolution times by department.
 
-## Project Architecture
+**Data is synthetic.** `generate_raw_data.py` (seed 42) creates the tickets, so differences between departments (e.g. DevOps slowest) come from the generator's settings, not real operations. The point of this repo is the pipeline, not the findings.
 
-```plaintext
-IT-Support-Ticket-Python/
-│
-├── data/
-│   ├── raw/                      # Raw CSV ticket export (~10,000 rows)
-│   └── processed/                # Sanitized output CSV
-├── src/
-│   ├── __init__.py               # Package marker
-│   ├── data_loader.py            # File I/O & exception handling
-│   ├── data_cleaning.py          # String sanitization & deduplication
-│   ├── ticket_analysis.py        # Datetime math & SLA performance binning
-│   └── visualization.py         # Plotting & image generation
-├── reports/                      # Exported PNG chart assets
-├── main.py                       # Single-command pipeline orchestrator
-├── requirements.txt              # Project dependencies
-└── README.md
+## What it does
+- `data_loader.py`: loads the CSV; clear error if the file is missing or empty
+- `data_cleaning.py`: strips whitespace, drops duplicate Ticket_IDs (1 found), fills missing priorities with "Unassigned" (485 found)
+- `ticket_analysis.py`: resolution hours per ticket, bucketed <4h / 4-24h / >24h
+- `visualization.py`: saves 3 charts to `reports/`
 
-```
+## Run
+pip install -r requirements.txt
+python generate_raw_data.py
+python main.py
 
-## Some Notes
-Built this project over a few weeks to transition from writing quick scripts in Jupyter Notebooks to building modular, reproducible Python ETL pipelines. 
-
-**Key Takeaways:**
-* **Pipeline Architecture:** Splitting code across separate `src/` modules (loader, cleaner, analyzer, visualizer) made debugging far cleaner than managing one massive script.
-* **Data Sanitization:** Cleaning raw ticket string fields and handling missing priority markers highlighted how small anomalies in log files distort downstream SLA reporting.
+Rebuilt in Sep 2026 after my original Codtech internship work (Jun-Jul 2025) was lost with my old laptop.
