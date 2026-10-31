@@ -71,4 +71,4 @@ df.iloc[15] = df.iloc[14]
 raw_path = Path("data/raw/it_support_tickets.csv")
 raw_path.parent.mkdir(parents=True, exist_ok=True)
 df.to_csv(raw_path, index=False)
-print(f"[SUCCESS] Regenerated realistic raw ticket dataset at '{raw_path}'")
+print(f"Wrote synthetic ticket data to '{raw_path}'")

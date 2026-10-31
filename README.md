@@ -10,6 +10,9 @@ Modular pipeline that cleans 10,000 IT support tickets and reports resolution ti
 - `ticket_analysis.py`: resolution hours per ticket, bucketed <4h / 4-24h / >24h
 - `visualization.py`: saves 3 charts to `reports/`
 
+![Average Resolution by Department](reports/avg_resolution_by_department.png)
+
+
 ## Run
 pip install -r requirements.txt
 python generate_raw_data.py
