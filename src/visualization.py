@@ -6,7 +6,7 @@ from data_cleaning import clean_ticket_data
 from data_loader import load_raw_tickets
 from ticket_analysis import process_ticket_metrics
 
-# Set consistent visual aesthetic across all outputs
+# Setting the consistent visual aesthetic across all of the aoutputs
 sns.set_theme(style="whitegrid", palette="muted")
 
 
@@ -51,7 +51,7 @@ def generate_all_plots(
         .sort_values(by="Resolution_Time_Hours", ascending=False)
     )
     sns.barplot(
-        data=dept_avg, x="Department", y="Resolution_Time_Hours", palette="crest"
+        data=dept_avg, x="Department", y="Resolution_Time_Hours", hue="Department", legend=False, palette="viridis"
     )
     plt.title("Average Resolution Duration by Department", fontsize=14, pad=12)
     plt.xlabel("Department", fontsize=11)
@@ -67,7 +67,7 @@ def generate_all_plots(
         data=df,
         x="Priority",
         order=[p for p in priority_order if p in df["Priority"].unique()],
-        palette="magma",
+        hue="Department", legend=False, palette="viridis",
     )
     plt.title("Ticket Distribution by Priority Level", fontsize=14, pad=12)
     plt.xlabel("Priority Class", fontsize=11)

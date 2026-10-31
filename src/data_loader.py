@@ -27,7 +27,7 @@ def load_raw_tickets(file_path: str) -> pd.DataFrame:
             )
 
         print(
-            f"[SUCCESS] Loaded {len(df):,} records across {len(df.columns)} columns from '{path.name}'."
+            f"[success] Data is now loaded {len(df):,} records across {len(df.columns)} columns from '{path.name}'."
         )
         return df
 
